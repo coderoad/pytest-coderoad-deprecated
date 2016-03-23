@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noEmit": false,
+    "outDir": "lib"
+  },
+  "compileOnSave": true,
+  "buildOnSave": true,
+  "filesGlob": [
+    "src/*.ts",
+    "src/typings/**/*.d.ts"
+  ],
+  "files": [
+    "src/create-runner.ts",
+    "src/exists.ts",
+    "src/loaders.ts",
+    "src/reporter.ts",
+    "src/runner.ts",
+    "src/utils.ts",
+    "src/typings/chai/chai.d.ts",
+    "src/typings/cr/cr.d.ts",
+    "src/typings/cr/globals.d.ts",
+    "src/typings/es6-promise/es6-promise.d.ts",
+    "src/typings/mocha/mocha.d.ts",
+    "src/typings/node/node.d.ts",
+    "src/typings/tsd.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "pytest-coderoad",
+  "version": "0.1.0",
+  "description": "pytest test runner & reporter for atom-coderoad",
+  "main": "lib/runner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderoad/pytest-coderoad.git"
+  },
+  "files": [
+    "lib",
+    "package.json",
+    "*.md"
+  ],
+  "keywords": [
+    "coderoad",
+    "python",
+    "pytest"
+  ],
+  "author": "Shawn McKay <shawn.j.mckay@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coderoad/pytest-coderoad/issues"
+  },
+  "homepage": "https://github.com/coderoad/pytest-coderoad#readme",
+  "dependencies": {
+
+  }
+}
