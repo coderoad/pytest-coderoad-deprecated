@@ -29,23 +29,40 @@ export default function runner(testFile: string, config: CR.Config,
       }
 
       let result = JSON.parse(require(pathToResults));
+      if (!result.report || !result.report.tests.length) {
+        console.log('error with test output in report.json');
+        return;
+      }
 
-      result = result.included[result.included.length - 1].attributes.call;
+      let finalTest = result.report.tests[0];
 
-      if (result.outcome === 'passed') {
+      let taskPosition: number = parseInt(finalTest.name.match(/::Test([0-9]+)/)[1], 10);
+      if (!taskPosition) {
+        console.log('Error with test. There is no valid task number in the Test class title');
+        return;
+      }
+
+      if (finalTest.outcome === 'passed') {
         // pass
         final = {
-          pass: true,
-          msg: 'Task ${0} Complete', // TODO
-          taskPosition: 0 // TODO
+          completed: true,
+          msg: 'Task ${taskPosition} Complete',
+          taskPosition: taskPosition + 1
         };
-
-      } else if (result.outcome === 'failed') {
+      } else if (finalTest.outcome === 'failed') {
         // fail: return first failure
+
+        // failure message
+        let message: string = finalTest.name.match(/::test_(.+)$/)[1];
+        if (!message) {
+          console.log('Error with test. There is no valid test message');
+          message = '';
+        }
+
         final = {
-          pass: false,
-          msg: formatFailureMessage(), // TODO
-          taskPosition: 0, // TODO
+          completed: false,
+          msg: formatFailureMessage(message),
+          taskPosition,
           timedOut: false // TODO
         };
 
@@ -55,7 +72,7 @@ export default function runner(testFile: string, config: CR.Config,
 
       final.change = final.taskPosition - config.taskPosition;
       final.pass = final.change > 0;
-      final.completed = result.pass;
+
       // return result to atom-coderoad
       handleResult(final);
     });

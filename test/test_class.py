@@ -1,8 +1,11 @@
-class TestClass:
-    def passing_test(self):
-        x = "this"
-        assert 'h' in x
+a = 1;
 
-    def failing_test(self):
-        x = "hello"
-        assert hasattr(x, 'check')
+class Test01Class:
+    def test_passing_one(self):
+        assert a == 1
+
+    def test_passing_test(self):
+        assert a < 2
+
+    def test_failing_test(self):
+        assert a > 2
