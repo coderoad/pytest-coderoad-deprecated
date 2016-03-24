@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-export function fileExists(path: string): boolean {
+export default function fileExists(path: string): boolean {
   try {
     fs.accessSync(path, fs.F_OK);
   } catch (e) {

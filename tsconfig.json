@@ -17,9 +17,7 @@
   "files": [
     "src/create-runner.ts",
     "src/exists.ts",
-    "src/loaders.ts",
     "src/runner.ts",
-    "src/utils.ts",
     "src/typings/cr/cr.d.ts",
     "src/typings/cr/globals.d.ts",
     "src/typings/es6-promise/es6-promise.d.ts",

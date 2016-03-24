@@ -1,12 +1,18 @@
-import {signal} from './utils';
+import * as path from 'path';
+import exists from './exists';
 import {createRunner} from './create-runner';
+
+const pathToResults = path.resolve(__dirname, '', 'report.json');
+
+function formatFailureMessage(message: string) {
+  return message.split('_').join(' ');
+}
 
 export default function runner(testFile: string, config: CR.Config,
   handleResult: (result) => CR.TestResult) {
 
   let runner = createRunner(config, testFile);
   var final = null;
-  let signalMatch = new RegExp(signal);
 
   return new Promise((resolve, reject) => {
     runner.stdout.on('data', function(data): void {
@@ -14,29 +20,35 @@ export default function runner(testFile: string, config: CR.Config,
       data = data.toString();
       console.log(data);
 
-      // parse only final output data
-      let match = signalMatch.exec(data); // 0
+      /* Result */
+      // transform string result into object
 
-      if (!match) {
-        console.log(data);
+      if (!exists(pathToResults)) {
+        console.log('error finding test output file: ', data);
         return;
       }
 
-      /* Result */
-      // transform string result into object
-      let resultString = data.substring(match.index + signal.length);
-      let result = JSON.parse(JSON.stringify(resultString));
-      // why parse twice? I don't know, but it works
-      if (typeof result === 'string') {
-        result = JSON.parse(result);
-      }
+      let result = JSON.parse(require(pathToResults));
 
-      if (result.pass) {
+      result = result.included[result.included.length - 1].attributes.call;
+
+      if (result.outcome === 'passed') {
         // pass
-        final = result.passes[result.passes.length - 1];
-      } else if (result.pass === false ) {
+        final = {
+          pass: true,
+          msg: 'Task ${0} Complete', // TODO
+          taskPosition: 0 // TODO
+        };
+
+      } else if (result.outcome === 'failed') {
         // fail: return first failure
-        final = result.failures[0];
+        final = {
+          pass: false,
+          msg: formatFailureMessage(), // TODO
+          taskPosition: 0, // TODO
+          timedOut: false // TODO
+        };
+
       } else {
         console.log('error processing result: ', result);
       }

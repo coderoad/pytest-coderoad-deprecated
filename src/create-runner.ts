@@ -29,7 +29,7 @@ export function createRunner(config: CR.Config, testFile: string) {
   return spawn(node, [
     'py.test',
     '--json=report.json',
-    path.join(__dirname, 'loaders'),
+    '-x', // stop after first failure
     testFile
   ], options);
 }
