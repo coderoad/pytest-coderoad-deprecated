@@ -30,6 +30,7 @@ export function createRunner(config: CR.Config, testFile: string) {
     'py.test',
     '--json=report.json',
     '-x', // stop after first failure
+    'tb=no', // no printing traceback to console
     testFile
   ], options);
 }

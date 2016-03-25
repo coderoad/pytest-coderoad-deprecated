@@ -1,3 +1,4 @@
 .cache
 test/__pycache__
 report.json
+node_modules

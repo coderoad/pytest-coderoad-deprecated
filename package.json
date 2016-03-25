@@ -4,7 +4,7 @@
   "description": "pytest test runner & reporter for atom-coderoad",
   "main": "lib/runner.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/coderoad/pytest-coderoad/issues"
   },
-  "homepage": "https://github.com/coderoad/pytest-coderoad#readme"
+  "homepage": "https://github.com/coderoad/pytest-coderoad#readme",
+  "devDependencies": {
+    "ava": "^0.13.0"
+  }
 }
