@@ -12,17 +12,13 @@
   "buildOnSave": true,
   "filesGlob": [
     "src/*.ts",
-    "src/typings/**/*.d.ts"
+    "src/typings/*.d.ts"
   ],
   "files": [
     "src/create-runner.ts",
     "src/exists.ts",
     "src/parse-json.ts",
     "src/runner.ts",
-    "src/typings/cr/cr.d.ts",
-    "src/typings/cr/globals.d.ts",
-    "src/typings/es6-promise/es6-promise.d.ts",
-    "src/typings/node/node.d.ts",
     "src/typings/tsd.d.ts"
   ],
   "exclude": [

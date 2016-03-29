@@ -14,13 +14,16 @@ function formatFailureMessage(message: string): string {
 }
 
 export function parseJson(pathToResults: string): ParseFinal {
-  let result = JSON.parse(require(pathToResults));
-  if (!result.report || !result.report.tests.length) {
+  let result = JSON.parse(JSON.stringify(require(pathToResults)));
+  if (!result.report || !result.report.tests.length || !result.report.summary) {
     console.log('error with test output in report.json');
     return;
   }
 
-  let finalTest = result.report.tests[0];
+  let finalIndex = result.report.summary.num_tests - 1;
+  let finalTest = result.report.tests.find(function(test) {
+    return test.run_index === finalIndex;
+  });
   let taskPosition: number = parseInt(finalTest.name.match(testNumber)[1], 10);
 
   if (!taskPosition) {
@@ -28,14 +31,16 @@ export function parseJson(pathToResults: string): ParseFinal {
     return;
   }
 
-  if (finalTest.outcome === 'passed') {
+  let failed = result.report.summary.failed > 0;
+
+  if (!failed) {
     // pass
     final = {
       completed: true,
-      msg: 'Task ${taskPosition} Complete',
-      taskPosition: taskPosition + 1
+      msg: `Task ${taskPosition} Complete`,
+      taskPosition
     };
-  } else if (finalTest.outcome === 'failed') {
+  } else {
     // fail: return first failure
 
     // failure message
@@ -48,12 +53,10 @@ export function parseJson(pathToResults: string): ParseFinal {
     final = {
       completed: false,
       msg: formatFailureMessage(message),
-      taskPosition,
+      taskPosition: taskPosition - 1,
       timedOut: false // TODO
     };
 
-  } else {
-    console.log('error processing result: ', result);
   }
 
   return final;
