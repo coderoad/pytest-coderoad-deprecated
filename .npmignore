@@ -1,6 +1,7 @@
 test
 node_modules
 .cache
+report.json
 tsconfig.json
 tslint.json
 src

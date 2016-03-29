@@ -15,16 +15,13 @@ export default function runner(testFile: string, config: CR.Config,
     runner.stdout.on('data', function(data): void {
 
       data = data.toString();
-      console.log(data);
-
-      /* Result */
-      // transform string result into object
 
       if (!exists(pathToResults)) {
         console.log('error finding test output file: ', data);
         return;
       }
 
+      // transform data;
       final = parseJson(pathToResults);
       final.change = final.taskPosition - config.taskPosition;
       final.pass = final.change > 0;

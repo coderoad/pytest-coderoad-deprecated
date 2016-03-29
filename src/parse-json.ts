@@ -1,13 +1,6 @@
-let final = null;
+let final: ParseFinal = null;
 const testNumber = /::Test([0-9]+)/;
 const testMessage = /::test_(.+)$/;
-
-interface ParseFinal {
-  complete: boolean;
-  msg: string;
-  taskPosition: number;
-  timedOut?: boolean;
-}
 
 function formatFailureMessage(message: string): string {
   return message.split('_').join(' ');
@@ -20,8 +13,8 @@ export function parseJson(pathToResults: string): ParseFinal {
     return;
   }
 
-  let finalIndex = result.report.summary.num_tests - 1;
-  let finalTest = result.report.tests.find(function(test) {
+  let finalIndex: number = result.report.summary.num_tests - 1;
+  let finalTest: PyTest = result.report.tests.find(function(test: PyTest) {
     return test.run_index === finalIndex;
   });
   let taskPosition: number = parseInt(finalTest.name.match(testNumber)[1], 10);
@@ -31,7 +24,7 @@ export function parseJson(pathToResults: string): ParseFinal {
     return;
   }
 
-  let failed = result.report.summary.failed > 0;
+  let failed: boolean = result.report.summary.failed > 0;
 
   if (!failed) {
     // pass
