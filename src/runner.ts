@@ -1,9 +1,9 @@
 import * as path from 'path';
 import exists from './exists';
-import {createRunner} from './create-runner';
-import {parseJson} from './parse-json';
+import createRunner from './create-runner';
+import parseJson from './parse-json';
 
-const pathToResults = path.resolve(__dirname, '', 'report.json');
+const pathToResults = path.resolve(__dirname, '..', '_report.json');
 
 export default function runner(testFile: string, config: CR.Config,
   handleResult: (result) => CR.TestResult) {
@@ -15,6 +15,7 @@ export default function runner(testFile: string, config: CR.Config,
     runner.stdout.on('data', function(data): void {
 
       data = data.toString();
+      console.log(data);
 
       if (!exists(pathToResults)) {
         console.log('error finding test output file: ', data);

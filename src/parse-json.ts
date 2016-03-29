@@ -6,7 +6,7 @@ function formatFailureMessage(message: string): string {
   return message.split('_').join(' ');
 }
 
-export function parseJson(pathToResults: string): ParseFinal {
+export default function parseJson(pathToResults: string): ParseFinal {
   let result = JSON.parse(JSON.stringify(require(pathToResults)));
   if (!result.report || !result.report.tests.length || !result.report.summary) {
     console.log('error with test output in report.json');

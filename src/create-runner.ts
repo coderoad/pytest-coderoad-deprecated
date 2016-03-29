@@ -1,32 +1,20 @@
 import * as path from 'path';
-const spawn = require('child_process').spawn;
+const child = require('child_process');
 
-// get absolute path to node exec
-let node = null;
-if (process.platform === 'darwin' && process.resourcesPath) {
-  node = path.resolve(process.resourcesPath, '..', 'Frameworks', 'Atom Helper.app', 'Contents', 'MacOS', 'Atom Helper');
-} else if (process.platform.match(/win/)) {
-  node = 'node';
-} else {
-  node = process.execPath;
-}
+export default function createRunner(config: CR.Config, testFile: string) {
 
-export function createRunner(config: CR.Config, testFile: string) {
-  // node electron setup
-  let options: any = {
-    cwd: config.dir
-  };
-  if (options.env == null) {
-    options.env = Object.create(process.env);
-  }
-  options.env.ATOM_SHELL_INTERNAL_RUN_AS_NODE = 1;
+  let report = path.join(__dirname, '..', '_report.json');
 
-  // spawn child process calling test runner
-  return spawn(node, [
+  return child.exec([
     'py.test',
-    '--json=report.json',
+    `--json=${report}`,
     '-x', // stop after first failure
-    'tb=no', // no printing traceback to console
     testFile
-  ], options);
+  ].join(' '), (error, stdout, stderr) => {
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+      if (error !== null) {
+        console.log(`exec error: ${error}`);
+      }
+    });
 }

@@ -1,8 +1,8 @@
 import test from 'ava';
 import * as path from 'path';
-import {
-  parseJson
-} from '../lib/parse-json';
+import parseJson from '../lib/parse-json';
+
+
 
 test('will pass all', t => {
   let result = parseJson(path.join(__dirname, 'reports', 'pass-three.json'));

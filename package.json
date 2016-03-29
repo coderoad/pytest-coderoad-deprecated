@@ -28,5 +28,15 @@
   "homepage": "https://github.com/coderoad/pytest-coderoad#readme",
   "devDependencies": {
     "ava": "^0.13.0"
+  },
+  "ava": {
+    "files": [
+      "test/*.spec.js",
+      "!node_modules"
+    ],
+    "source": [
+      "test/*.spec.js"
+    ],
+    "failFast": true
   }
 }
