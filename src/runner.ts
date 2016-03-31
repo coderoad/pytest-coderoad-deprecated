@@ -16,7 +16,7 @@ export default function runner(testFile: string, config: CR.Config,
     runner.stdout.on('data', function(data): void {
 
       data = data.toString();
-      // console.log('DATA', data);
+      console.log('DATA', data);
 
       // transform data;
       final = parseTap(data);
@@ -32,7 +32,7 @@ export default function runner(testFile: string, config: CR.Config,
       console.log('test error', data.toString());
     });
 
-    runner.on('close', function(code: number) {
+    runner.on('end', function(code: number) {
       if (code === 0) {
         resolve(final);
       } else {
