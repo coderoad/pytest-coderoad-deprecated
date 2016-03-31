@@ -1,6 +1,3 @@
-import * as path from 'path';
-import * as fs from 'fs';
-import exists from './exists';
 import createRunner from './create-runner';
 import parseTap from './parse-tap';
 
@@ -16,7 +13,6 @@ export default function runner(testFile: string, config: CR.Config,
     runner.stdout.on('data', function(data): void {
 
       data = data.toString();
-      console.log('DATA', data);
 
       // transform data;
       final = parseTap(data);
@@ -29,7 +25,9 @@ export default function runner(testFile: string, config: CR.Config,
     });
 
     runner.stderr.on('data', function(data) {
-      console.log('test error', data.toString());
+      if (data.length) {
+        console.log('test error', data.toString());
+      }
     });
 
     runner.on('end', function(code: number) {

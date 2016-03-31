@@ -7,13 +7,16 @@ function formatFailureMessage(message: string): string {
 }
 
 export default function parseTap(data: string): ParseFinal {
+
+  console.log('DATA', data);
+
   if (!data.match(isTap)) {
-    console.log('No TAP output');
+    console.log('No TAP output: ', data);
     return;
   }
 
   if (!data.match(finalTestNumber)) {
-    console.log('Could not parse final test number');
+    console.log('Could not parse final test number: ', data);
     return;
   }
   let finalTest: number = parseInt(data.match(finalTestNumber)[1], 10);
@@ -26,11 +29,18 @@ export default function parseTap(data: string): ParseFinal {
 
     let failingLineRegex = new RegExp(`^not ok ${finalTest} - (.+)$`, 'm');
     let line: string = data.match(failingLineRegex)[1];
-    let taskPosition: number = parseInt(line.match(/Test([0-9]+)/)[1], 10);
-    let message: string = formatFailureMessage(line.match(/\.test_(.+)$/)[1]);
+    if (!line) {
+      console.log('Error matching failing test line: ', data);
+    }
 
+    let taskPosition: number = parseInt(line.match(/Test([0-9]+)/)[1], 10);
+    if (!taskPosition) {
+      console.log('No matching taskPosition', data);
+    }
+
+    let message: string = formatFailureMessage(line.match(/\.test_(.+)$/)[1]);
     if (!message) {
-      console.log('Error with test. There is no valid test message');
+      console.log('Error with test. There is no valid test message: ', data);
       message = '';
     }
 
