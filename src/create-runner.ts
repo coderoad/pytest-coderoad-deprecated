@@ -1,8 +1,21 @@
+import exists from './exists';
 const child = require('child_process');
 
-export default function createRunner(config: CR.Config, testFile: string) {
+let python = 'python';
+let localPath = '/usr/local/bin/python';
+let globalPath = '/usr/bin/python';
 
-  let python = '/usr/local/bin/python';
+if (process.platform === 'darwin' && process.resourcesPath) {
+  if (exists(localPath)) {
+    python = localPath;
+  } else if (exists(globalPath)) {
+    python = globalPath;
+  } else {
+    throw 'Python not found. Python may not be installed';
+  }
+}
+
+export default function createRunner(config: CR.Config, testFile: string) {
 
   return child.exec([
     python,
