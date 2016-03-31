@@ -8,8 +8,6 @@ function formatFailureMessage(message: string): string {
 
 export default function parseTap(data: string): ParseFinal {
 
-  console.log('DATA', data);
-
   if (!data.match(isTap)) {
     console.log('No TAP output: ', data);
     return;

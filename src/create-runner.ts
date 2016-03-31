@@ -11,9 +11,5 @@ export default function createRunner(config: CR.Config, testFile: string) {
     '-x', // stop after first failure
     '--tb=no', // no traceback
     testFile
-  ].join(' '), (error, stdout, stderr) => {
-      if (error !== null) {
-        console.log(`test exec error: ${error}`);
-      }
-    });
+  ].join(' '));
 }
