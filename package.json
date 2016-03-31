@@ -37,6 +37,8 @@
     "source": [
       "test/*.spec.js"
     ],
-    "failFast": true
+    "failFast": false,
+    "serial": true,
+    "noCache": true
   }
 }

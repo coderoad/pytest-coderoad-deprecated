@@ -18,6 +18,7 @@
     "src/create-runner.ts",
     "src/exists.ts",
     "src/parse-json.ts",
+    "src/parse-tap.ts",
     "src/runner.ts",
     "src/typings/tsd.d.ts"
   ],

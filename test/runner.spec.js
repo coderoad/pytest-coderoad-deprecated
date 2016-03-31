@@ -4,13 +4,6 @@ import * as fs from 'fs';
 import exists from '../lib/exists';
 import {getRunner} from './runner-setup';
 
-test.beforeEach(t => {
-  let file = path.resolve(__dirname, '..', '_report.json');
-  if (exists(file)) {
-    fs.unlink(file);
-  }
-});
-
 test('runner runs a single test to completion', async t => {
   let file = path.join(__dirname, 'demos', 'single-test.py');
   let run = await getRunner(file);
@@ -37,5 +30,30 @@ test('runner runs three tests to completion', async t => {
     t.same(run, expected);
 });
 
-test.todo('runner fails early at first failure');
-test.todo('runner fails at final test');
+test('runner fails early at first failure', async t => {
+  let file = path.join(__dirname, 'demos', 'fail-at-one.py');
+  let run = await getRunner(file);
+  let expected = {
+    change: 0,
+    pass: false,
+    taskPosition: 0,
+    msg: 'failing test',
+    completed: false,
+    timedOut: false
+  };
+  t.same(run, expected);
+});
+
+test('runner fails at final test', async t => {
+      let file = path.join(__dirname, 'demos', 'fail-at-three.py');
+      let run = await getRunner(file);
+      let expected = {
+        change: 2,
+        pass: true,
+        taskPosition: 2,
+        msg: 'failing test',
+        completed: false,
+        timedOut: false
+      };
+      t.same(run, expected);
+});

@@ -6,8 +6,8 @@ PyTest Python test runner for Atom-CodeRoad.
 
 Install Python
 
-pip install -U pytest
-pip install pytest-json
+    pip install -U pytest
+    pip install tap.py
 
 
 ### Writing Tests
