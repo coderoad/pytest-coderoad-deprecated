@@ -4,7 +4,6 @@ import parseTap from './parse-tap';
 export default function runner(testFile: string, config: CR.Config,
   handleResult: (result) => CR.TestResult) {
 
-
   // cleanup .json file
   let runner = createRunner(config, testFile);
   var final = null;
@@ -16,6 +15,11 @@ export default function runner(testFile: string, config: CR.Config,
 
       // transform data;
       final = parseTap(data);
+
+      if (!final) {
+        console.log('Error parsing test ouptut', data);
+      }
+
       final.change = final.taskPosition - config.taskPosition;
       final.pass = final.change > 0;
 

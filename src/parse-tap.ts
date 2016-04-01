@@ -8,7 +8,7 @@ function formatFailureMessage(message: string): string {
 
 export default function parseTap(data: string): ParseFinal {
 
-  if (!data.match(isTap)) {
+  if (!data || !data.match(isTap)) {
     console.log('No TAP output: ', data);
     return;
   }
@@ -27,17 +27,17 @@ export default function parseTap(data: string): ParseFinal {
 
     let failingLineRegex = new RegExp(`^not ok ${finalTest} - (.+)$`, 'm');
     let line: string = data.match(failingLineRegex)[1];
-    if (!line) {
+    if (!line || typeof line !== 'string') {
       console.log('Error matching failing test line: ', data);
     }
 
     let taskPosition: number = parseInt(line.match(/Test([0-9]+)/)[1], 10);
-    if (!taskPosition) {
+    if (!taskPosition || typeof taskPosition !== 'number') {
       console.log('No matching taskPosition', data);
     }
 
     let message: string = formatFailureMessage(line.match(/\.test_(.+)$/)[1]);
-    if (!message) {
+    if (!message || typeof message !== 'string') {
       console.log('Error with test. There is no valid test message: ', data);
       message = '';
     }
