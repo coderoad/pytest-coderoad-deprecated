@@ -1,5 +1,4 @@
 import exists from './exists';
-// import * as path from 'path';
 import {exec} from 'child_process';
 
 let python = 'python';
@@ -17,12 +16,6 @@ if (process.platform === 'darwin' && process.resourcesPath) {
 }
 
 export default function createRunner(config: CR.Config, testFile: string) {
-
-  // run concat file: editor & tests
-  // if (exists(path.join(__dirname, 'tmp.py'))) {
-  //   testFile = path.join(testFile.substring(0, testFile.lastIndexOf('/') || testFile.lastIndexOf('\\')), 'tmp.py');
-  // }
-
   return exec([
     python,
     '-m pytest',

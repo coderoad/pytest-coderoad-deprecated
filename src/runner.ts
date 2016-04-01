@@ -12,12 +12,14 @@ export default function runner(testFile: string, config: CR.Config,
     runner.stdout.on('data', function(data): void {
 
       data = data.toString();
+      if (!data || !data.length) {
+        return;
+      }
 
       // transform data;
       final = parseTap(data);
-
       if (!final) {
-        console.log('Error parsing test ouptut', data);
+        console.log('Error parsing test ouptut:', data);
       }
 
       final.change = final.taskPosition - config.taskPosition;
@@ -30,7 +32,7 @@ export default function runner(testFile: string, config: CR.Config,
 
     runner.stderr.on('data', function(data) {
       if (data.length) {
-        console.log('test error', data.toString());
+        console.log('Test runner error:', data.toString());
       }
     });
 
