@@ -1,0 +1,48 @@
+{
+  "project": {
+    "title": "PyTest Demo",
+    "description": "A demo for testing Python's PyTest in CodeRoad."
+  },
+  "chapters": [
+    {
+      "title": "Basic",
+      "description": "Some basic tests to try out PyTest.",
+      "pages": [
+        {
+          "title": "Math",
+          "description": "Some basic math.\n\nAddition:\n`1 + 1 == 2`\n\nSubtraction:\n`2 - 1 == 1`",
+          "tasks": [
+            {
+              "description": "This test should pass automatically.",
+              "tests": [
+                "1/01/01-add"
+              ],
+              "actions": [
+                "open('math.py')",
+                "set('# add')"
+              ]
+            },
+            {
+              "description": "This test should also pass automatically",
+              "tests": [
+                "1/01/02-subtract"
+              ],
+              "actions": [
+                "insert('# subtract')"
+              ]
+            },
+            {
+              "description": "Set a variable `a` to 1",
+              "tests": [
+                "1/01/03-value"
+              ],
+              "actions": [
+                "insert('# value')"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

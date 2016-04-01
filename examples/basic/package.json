@@ -1,0 +1,22 @@
+{
+  "name": "coderoad-pytest-demo",
+  "version": "0.1.0",
+  "description": "Demo for pytest runner",
+  "main": "coderoad.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shawn McKay <shawn.j.mckay@gmail.com>",
+  "license": "ISC",
+  "engines": {
+    "node": ">= 0.10.3"
+  },
+  "dependencies": {
+    "pytest-coderoad": "^0.1.0"
+  },
+  "config": {
+    "testDir": "tutorial",
+    "testSuffix": ".py",
+    "testRunner": "pytest-coderoad"
+  }
+}

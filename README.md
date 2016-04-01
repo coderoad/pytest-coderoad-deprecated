@@ -36,3 +36,30 @@ Test method providing the feedback message and starting with `test_`
         def test_a_is_not_one(self):
           assert a == 1
           # fails with message "a is not one"
+
+
+##### Loading Workspace Files
+
+Workspace files (created by the user) can be loaded inside of comments
+
+    # load('file.py')
+
+These files will be loaded from the users working directory.
+
+##### Loading Data Files
+
+Data files can be by setting a second parameter to `true`.
+
+    # load('path/to/data.py', true)
+
+These files will load from the specified tutorial directory in *package.json*.
+
+*package.json*
+
+    config {
+      tutorialDir: 'tutorial'
+    }
+
+##### Complete Example
+
+See the [examples](//github.com/coderoad/pytest-coderoad) directory.
