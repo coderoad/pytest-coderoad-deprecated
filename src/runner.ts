@@ -16,6 +16,10 @@ export default function runner(testFile: string, config: CR.Config,
         return;
       }
 
+      console.log('data', data);
+      // console.log
+      // console.dir
+
       // transform data;
       final = parseTap(data);
       if (!final) {

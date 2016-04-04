@@ -19,6 +19,7 @@ export default function createRunner(config: CR.Config, testFile: string) {
   return exec([
     python,
     '-m pytest',
+    '-s',
     '--tap-stream',
     '-x', // stop after first failure
     '--tb=no', // no traceback

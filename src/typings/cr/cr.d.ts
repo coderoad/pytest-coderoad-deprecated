@@ -22,7 +22,6 @@ interface TestResult {
     runner?: any;
     taskPosition?: number;
   }
-
 }
 
 interface Process {
