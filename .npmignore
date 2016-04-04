@@ -5,3 +5,4 @@ report.json
 tsconfig.json
 tslint.json
 src
+examples

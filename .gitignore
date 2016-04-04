@@ -2,3 +2,6 @@
 **/__pycache__
 _report.json
 node_modules
+npm-debug.log
+examples/**/node_modules
+examples/basic/tutorial/_tmp.py

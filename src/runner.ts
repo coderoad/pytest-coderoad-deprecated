@@ -1,6 +1,21 @@
 import createRunner from './create-runner';
 import parseTap from './parse-tap';
 
+function log(data: string): void {
+  var logs = data.match(/^(?!# TAP)(?!(not )?ok [0-9]+ -)(?!1..[0-9]+)(?!# E\s)(.*)$/gm);
+  if (logs && logs.length > 0) {
+    logs.forEach((line: string) => {
+      if (line.length > 0) {
+        try {
+          console.dir(JSON.parse(JSON.stringify(line)));
+        } catch (e) {
+          console.log(line);
+        }
+      }
+    });
+  }
+}
+
 export default function runner(testFile: string, config: CR.Config,
   handleResult: (result) => CR.TestResult) {
 
@@ -16,9 +31,8 @@ export default function runner(testFile: string, config: CR.Config,
         return;
       }
 
-      console.log('data', data);
-      // console.log
-      // console.dir
+      // capture any abnormal data as a log
+      log(data);
 
       // transform data;
       final = parseTap(data);

@@ -1,32 +1,15 @@
 const regex = {
-  isTap: /^# TAP/m,
+  isTap: /^# TAP results/m,
   test: /^[not ]?ok [0-9]+ -/m,
   finalTest: /^1..([0-9+])$/m,
-  error: /^# E\s+(.+)$/m,
-  log: /^(?!# TAP)(?!(not )?ok [0-9]+ -)(?!1..[0-9]+)(?!# E\s)(.*)$/
+  error: /^# E\s+(.+)$/m
 };
 
 function formatFeedback(message: string): string {
   return message.split('_').join(' ');
 }
 
-function log(data: string): void {
-  var logs = data.match(regex.log);
-  if (logs && logs.length > 0) {
-    logs.forEach((line: string) => {
-      try {
-        console.dir(JSON.parse(JSON.stringify(line)));
-      } catch (e) {
-        console.log(data);
-      }
-    });
-  }
-}
-
 export default function parseTap(data: string): ParseFinal {
-
-  // capture any abnormal data as a log
-  log(data);
 
   if (!data || !data.match(regex.isTap)) {
     console.log('No TAP output: ', data);

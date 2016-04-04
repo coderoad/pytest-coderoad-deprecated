@@ -1,6 +1,6 @@
 {
   "name": "pytest-coderoad",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "pytest test runner & reporter for atom-coderoad",
   "main": "lib/runner.js",
   "scripts": {
