@@ -11,25 +11,26 @@ function formatFeedback(message: string): string {
 
 export default function parseTap(data: string): ParseFinal {
 
+  // Output as TAP?
   if (!data || !data.match(regex.isTap)) {
     console.log('No TAP output: ', data);
     return;
   }
 
+  // Final test number?
   if (!data.match(regex.finalTest)) {
     console.log('Could not parse final test number: ', data);
     return;
   }
-
   let finalTest: number = parseInt(data.match(regex.finalTest)[1], 10);
-
   let final: ParseFinal = null;
 
+  // Fail or Pass?
   if (data.match(regex.error)) {
 
     // first FAILing test
 
-    let failingLineRegex = new RegExp(`^not ok ${finalTest} - (.+)$`, 'm');
+    let failingLineRegex: RegExp = new RegExp(`^not ok ${finalTest} - (.+)$`, 'm');
     let line: string = data.match(failingLineRegex)[1];
     if (!line || typeof line !== 'string') {
       console.log('Error matching failing test line: ', data);
@@ -56,7 +57,7 @@ export default function parseTap(data: string): ParseFinal {
 
     // all tests PASS
 
-    let finalPassRegex = new RegExp(`^ok ${finalTest} - (.+)$`, 'm');
+    let finalPassRegex: RegExp = new RegExp(`^ok ${finalTest} - (.+)$`, 'm');
     let line: string = data.match(finalPassRegex)[1];
     let taskPosition: number = parseInt(line.match(/Test([0-9]+)/)[1], 10);
 

@@ -17,6 +17,7 @@
   "files": [
     "src/create-runner.ts",
     "src/exists.ts",
+    "src/logger.ts",
     "src/parse-tap.ts",
     "src/runner.ts",
     "src/typings/tsd.d.ts"
