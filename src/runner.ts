@@ -7,7 +7,12 @@ function log(data: string): void {
     logs.forEach((line: string) => {
       if (line.length > 0) {
         try {
-          console.dir(JSON.parse(JSON.stringify(line)));
+          line = JSON.parse(JSON.stringify(line));
+          if (typeof line === 'string') {
+            console.log(line);
+          } else {
+            console.dir(JSON.parse(JSON.stringify(line)));
+          }
         } catch (e) {
           console.log(line);
         }
@@ -17,7 +22,7 @@ function log(data: string): void {
 }
 
 export default function runner(testFile: string, config: CR.Config,
-  handleResult: (result) => CR.TestResult) {
+  handleResult: (result) => CR.TestResult): Promise<CR.TestResult> {
 
   // cleanup .json file
   let runner = createRunner(config, testFile);
