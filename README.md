@@ -14,7 +14,7 @@ Install Python
 
 ### Writing Tests
 
-There are two parts your tests will need: a task number and a feedback message.
+There are two parts your tests will need: a **task number** and a **feedback message**. You'll also need to load user created **workspace files** to run the tests on. You may also want to load additional **data files**.
 
 ##### Task number
 
@@ -40,21 +40,19 @@ Test method providing the feedback message and starting with `test_`
           # fails with message "a is not one"
 
 
-##### Loading Workspace Files
+##### Loading Files
 
-Workspace files (created by the user) can be loaded inside of comments
+**Workspace files** (created by the user) can be loaded inside of comments
 
     # load('file.py')
 
 These files will be loaded from the users working directory.
 
-##### Loading Data Files
-
-Data files can be by setting a second parameter to `true`.
+**Data files** can be loaded by setting a second parameter to `true`.
 
     # load('path/to/data.py', true)
 
-These files will load from the specified tutorial directory in *package.json*.
+Data files will load from the specified tutorial directory in *package.json*.
 
 *package.json*
 
