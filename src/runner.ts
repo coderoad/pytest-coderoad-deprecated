@@ -3,15 +3,16 @@ import parseTap from './parse-tap';
 import logger from './logger';
 
 
-export default function runner(testFile: string, config: CR.Config,
-  handleResult: (result) => CR.TestResult): Promise<CR.TestResult> {
+export default function runner({
+  testString, config, handleResult
+}): Promise<CR.TestResult> {
 
   // cleanup .json file
-  let runner = createRunner(config, testFile);
-  var final = null;
+  let runner = createRunner(config, testString);
+  let final = null;
 
-  return new Promise((resolve, reject) => {
-    runner.stdout.on('data', function(data): void {
+  return new Promise(function run(resolve, reject) {
+    runner.stdout.on('data', function testData(data): void {
 
       data = data.toString();
 
@@ -39,13 +40,13 @@ export default function runner(testFile: string, config: CR.Config,
       handleResult(final);
     });
 
-    runner.stderr.on('data', function(data) {
+    runner.stderr.on('data', function testError(data) {
       if (data.length) {
         console.log('Test runner error:', data.toString());
       }
     });
 
-    runner.on('end', function(code: number) {
+    runner.on('end', function testEnd(code: number) {
       if (code === 0) {
         resolve(final);
       } else {

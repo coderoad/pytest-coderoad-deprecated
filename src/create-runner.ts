@@ -1,5 +1,6 @@
 import exists from './exists';
 import {exec} from 'child_process';
+import {writeFileSync} from 'fs';
 
 let python = 'python';
 let localPath = '/usr/local/bin/python';
@@ -16,7 +17,14 @@ if (process.platform === 'darwin' && process.resourcesPath) {
   }
 }
 
-export default function createRunner(config: CR.Config, testFile: string) {
+
+const testFile = 'tmp-pytest.py';
+
+export default function createRunner(
+  config: CR.Config, testString: string
+) {
+  // write file and run test
+  writeFileSync(testFile, testString, 'utf8');
   // see pytest options: https://pytest.org/latest/usage.html
   return exec([
     python,

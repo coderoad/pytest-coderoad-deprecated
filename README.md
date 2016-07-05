@@ -1,6 +1,6 @@
 # PyTest CodeRoad
 
-PyTest Python test runner for [Atom-CodeRoad](https://github.com/coderoad/atom-coderoad).
+[PyTest](http://pytest.org/latest/) Python test runner for [Atom-CodeRoad](https://github.com/coderoad/atom-coderoad).
 
 [Learn more about CodeRoad](https://coderoad.github.io), an interactive coding tutorial creator built inside of Atom.
 

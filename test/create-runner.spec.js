@@ -1,9 +1,14 @@
-import test from 'ava';
-import * as path from 'path';
-import {getCreateRunner} from './runner-setup';
-
-test('creates a test runner', t => {
-  let testFile = path.join(__dirname, 'demos', 'single-test.py');
-  let createRunner = getCreateRunner(testFile);
-  t.ok(createRunner);
-});
+// import test from 'ava';
+// import {getCreateRunner} from './runner-setup';
+//
+// test('creates a test runner', t => {
+//   let testString = `
+// a = 1;
+//
+// class Test01Class:
+//     def test_single_test(self):
+//         assert a == 1
+// `
+//   let createRunner = getCreateRunner(testString);
+//   t.ok(createRunner);
+// });

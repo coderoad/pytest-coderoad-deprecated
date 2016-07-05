@@ -1,5 +1,5 @@
 {
-  "project": {
+  "info": {
     "title": "PyTest Demo",
     "description": "A demo for testing Python's PyTest in CodeRoad."
   },

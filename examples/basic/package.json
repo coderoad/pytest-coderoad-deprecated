@@ -15,8 +15,8 @@
     "pytest-coderoad": "^0.1.0"
   },
   "config": {
-    "testDir": "tutorial",
+    "dir": "tutorial",
     "testSuffix": ".py",
-    "testRunner": "pytest-coderoad"
+    "runner": "pytest-coderoad"
   }
 }

@@ -2,15 +2,15 @@ const regex = {
   isTap: /^# TAP results/m,
   test: /^[not ]?ok [0-9]+ -/m,
   finalTest: /^1..([0-9+])$/m,
-  error: /^# E\s+(.+)$/m
+  error: /^# E\s+(.+)$/m,
 };
 
+// format test titles into feedback messages
 function formatFeedback(message: string): string {
   return message.split('_').join(' ');
 }
 
 export default function parseTap(data: string): ParseFinal {
-
   // Output as TAP?
   if (!data || !data.match(regex.isTap)) {
     console.log('No TAP output: ', data);
@@ -51,7 +51,7 @@ export default function parseTap(data: string): ParseFinal {
       completed: false,
       msg: formatFeedback(message),
       taskPosition: taskPosition - 1,
-      timedOut: false // TODO
+      timedOut: false, // TODO
     };
   } else {
 
@@ -64,7 +64,7 @@ export default function parseTap(data: string): ParseFinal {
     final = {
       completed: true,
       msg: `Task ${taskPosition} Complete`,
-      taskPosition
+      taskPosition,
     };
   }
 

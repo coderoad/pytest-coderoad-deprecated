@@ -25,20 +25,5 @@
   "bugs": {
     "url": "https://github.com/coderoad/pytest-coderoad/issues"
   },
-  "homepage": "https://github.com/coderoad/pytest-coderoad#readme",
-  "devDependencies": {
-    "ava": "^0.13.0"
-  },
-  "ava": {
-    "files": [
-      "test/*.spec.js",
-      "!node_modules"
-    ],
-    "source": [
-      "test/*.spec.js"
-    ],
-    "failFast": false,
-    "serial": true,
-    "noCache": true
-  }
+  "homepage": "https://github.com/coderoad/pytest-coderoad#readme"
 }
